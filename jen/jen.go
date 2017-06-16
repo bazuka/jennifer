@@ -86,6 +86,13 @@ func (f *File) renderImports(source io.Writer) error {
 		}
 		sort.Strings(paths)
 		for _, path := range paths {
+			// Don't render package alias
+			// if alias identical to package name
+			guessedAlias := guessAlias(path)
+			alias := f.imports[path]
+			if alias == guessedAlias {
+				alias = ""
+			}
 			if _, err := fmt.Fprintf(source, "%s %s\n", f.imports[path], strconv.Quote(path)); err != nil {
 				return err
 			}
