@@ -70,7 +70,7 @@ func (f *File) Anon(paths ...string) {
 }
 
 // PackageAlias adds a custom alias to package:
-func (f *File) PackageAlias(path, alias ...string) {
+func (f *File) PackageAlias(path, alias string) {
 	// alias should be lower case
 	alias = strings.ToLower(alias)
 
