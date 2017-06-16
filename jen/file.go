@@ -69,6 +69,18 @@ func (f *File) Anon(paths ...string) {
 	}
 }
 
+// PackageAlias adds a custom alias to package:
+func (f *File) PackageAlias(path, alias ...string) {
+	// alias should be lower case
+	alias = strings.ToLower(alias)
+
+	// alias should now only contain alphanumerics and underscore
+	importsRegex := regexp.MustCompile(`[^a-z0-9_]`)
+	alias = importsRegex.ReplaceAllString(alias, "")
+
+	f.imports[path] = alias
+}
+
 func (f *File) isLocal(path string) bool {
 	return f.path == path
 }
