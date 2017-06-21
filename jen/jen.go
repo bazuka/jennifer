@@ -93,7 +93,7 @@ func (f *File) renderImports(source io.Writer) error {
 			if alias == guessedAlias {
 				alias = ""
 			}
-			if _, err := fmt.Fprintf(source, "%s %s\n", f.imports[path], strconv.Quote(path)); err != nil {
+			if _, err := fmt.Fprintf(source, "%s %s\n", alias, strconv.Quote(path)); err != nil {
 				return err
 			}
 		}
